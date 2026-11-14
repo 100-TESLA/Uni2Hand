@@ -1,0 +1,50 @@
+{
+  "name": "secondhand-ecommerce-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend for Secondhand Ecommerce",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "nodemon --exec tsx index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "check:email": "npm run build && node scripts/check-email.mjs",
+    "setup:otp": "npm run build && node scripts/setup-otp-lifecycle.mjs",
+    "setup:students": "npm run build && node scripts/setup-students.mjs",
+    "test:students": "npm run build && node tests/student-identity.mjs",
+    "test:trade": "npm run build && node tests/student-trade.mjs",
+    "test:ocr": "npm run build && node scripts/student-card-ocr.test.mjs",
+    "test:ocr:sample": "npm run build && node scripts/check-student-card.mjs",
+    "test:auth": "npm run build && node tests/auth-otp.mjs"
+  },
+  "dependencies": {
+    "@payos/node": "^2.0.5",
+    "@zxing/library": "^0.21.0",
+    "axios": "^1.15.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.3.1",
+    "google-auth-library": "^11.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.1.1",
+    "mongoose": "^7.3.1",
+    "nodemailer": "^10.0.10",
+    "onnxruntime-node": "^1.30.0",
+    "qs": "^6.15.1",
+    "sharp": "^0.35.5",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.5.0",
+    "@types/qs": "^6.15.0",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}

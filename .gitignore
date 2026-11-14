@@ -1,0 +1,35 @@
+node_modules/
+dist/
+out/
+build/
+
+.env
+.env.*
+!.env.example
+
+# --- TypeScript ---
+*.tsbuildinfo
+
+# --- Logs ---
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Runtime & OS ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.pid
+*.seed
+*.pid.lock
+
+# --- Coverage s---
+coverage/
+.nyc_output/
+Uni2hand_Figma_UI/
+
+server/tests/
+client/tests/

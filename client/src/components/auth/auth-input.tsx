@@ -1,0 +1,71 @@
+'use client';
+
+import { useId, useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
+
+interface AuthInputProps {
+  label: string;
+  labelRight?: React.ReactNode;
+  type?: 'text' | 'email' | 'password';
+  placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  showPasswordToggle?: boolean;
+  error?: string;
+}
+
+export function AuthInput({
+  label,
+  labelRight,
+  type = 'text',
+  placeholder,
+  value,
+  onChange,
+  showPasswordToggle = false,
+  error,
+}: AuthInputProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  const inputId = useId();
+  const isPassword = type === 'password';
+  const inputType = isPassword && showPasswordToggle ? (showPassword ? 'text' : 'password') : type;
+
+  return (
+    <div className="mb-4">
+      <div className="flex items-center justify-between mb-2">
+        <label htmlFor={inputId} className="block text-sm font-medium text-[#191C1F]">
+          {label}
+        </label>
+        {labelRight && <div className="text-sm">{labelRight}</div>}
+      </div>
+      <div className="relative">
+        <input
+          id={inputId}
+          type={inputType}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
+          className={`w-full px-4 py-3 ${isPassword && showPasswordToggle ? 'pr-12' : ''} border rounded-none text-[#191C1F] placeholder-[#686868] bg-white focus:outline-none transition ${
+            error 
+              ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' 
+              : 'border-[#C9CFD2] focus:border-[#1E40AF] focus:ring-1 focus:ring-[#1E40AF]'
+          }`}
+        />
+        {isPassword && showPasswordToggle && (
+          <button
+            type="button"
+            tabIndex={-1}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => setShowPassword((visible) => !visible)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#686868] hover:text-[#191C1F] transition"
+            aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+            aria-pressed={showPassword}
+            title={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+        )}
+      </div>
+      {error && <p className="mt-1.5 text-xs text-red-500 font-medium">{error}</p>}
+    </div>
+  );
+}
